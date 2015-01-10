@@ -8,16 +8,20 @@
 #include "zTTLV_Buffer.h"
 #include <string.h>
 
+uint8_t ui8CurrentPosition = 0 ;
 
 int zTTLV_Initialize( zTTLV_Buffer_t AzTLV_Buffer, size_t AzTLV_Buffer_Size )
 {
 	memset(AzTLV_Buffer, 0, AzTLV_Buffer_Size ) ;
+
+	ui8CurrentPosition = 0 ;
 
 	return 0 ;
 }
 
 int zTTLV_Put( zTTLV_Buffer_t AzTLV_Buffer, zTTLV_Item_t AzTLV_Item )
 {
+
 
 	return 0 ;
 }
