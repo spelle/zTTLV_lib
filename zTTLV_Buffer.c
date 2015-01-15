@@ -59,8 +59,9 @@ int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 			pzTTLV_Buffer->current_Position += sizeof(int16_t) ;
 			break ;
 		case ZTTLV_BUFFER :
-			pValue.pzTTLV_Buffer = (zTTLV_Buffer_t *) AzTTLV_Item.zValue.pzTTLV_Buffer ;
-			pzTTLV_Buffer->current_Position += sizeof(int16_t) ;
+			// (*pValue.pzTTLV_Buffer) = (zTTLV_Buffer_t) *AzTTLV_Item.zValue.pzTTLV_Buffer ;
+			memcpy( pValue.pzTTLV_Buffer, AzTTLV_Item.zValue.pzTTLV_Buffer, AzTTLV_Item.zLength ) ;
+			pzTTLV_Buffer->current_Position += AzTTLV_Item.zLength ;
 			break ;
 		default :
 			break ;

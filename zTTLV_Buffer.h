@@ -11,7 +11,7 @@
 #include <stddef.h>
 #include "zTTLV.h"
 
-typedef struct
+typedef struct zTTLV_Buffer
 {
 	uint8_t  current_Position ;
 	size_t  total_Length ;
