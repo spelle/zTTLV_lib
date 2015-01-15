@@ -16,6 +16,7 @@
 	#define pzTTLV_NULL 0
 #endif
 
+// zTTLV_Tag is 8-bit long : up to 255
 typedef uint8_t zTTLV_Tag_t ;
 
 /*
@@ -31,7 +32,7 @@ typedef enum
 	UINT16,
 	INT16 ,
 
-	ZTLV_BUFFER
+	ZTTLV_BUFFER
 } zTTLV_Type_t ;
 
 typedef uint8_t zTTLV_Length_t ;
@@ -43,13 +44,14 @@ struct zTTLV_Item ;
  */
 typedef union
 {
-	char          Char   ;
-	uint8_t       UInt8  ;
-	int8_t        Int8   ;
+	char          * pChar   ;
+	uint8_t       * pUInt8  ;
+	int8_t        * pInt8   ;
 
-	uint16_t      Uint16 ;
+	uint16_t      * pUInt16 ;
+	int16_t       * pInt16 ;
 
-	struct zTTLV_Item   * pzTTLV   ;
+	struct zTTLV_Buffer   * pzTTLV_Buffer   ;
 } zTTLV_Value_t ;
 
 /*
