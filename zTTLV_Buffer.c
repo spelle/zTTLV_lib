@@ -20,6 +20,7 @@ int zTTLV_Initialize( zTTLV_Buffer_t * pzTTLV_Buffer, size_t AzTTLV_Buffer_Size 
 
 int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 {
+	uint8_t ui8 = 0 ;
 	zTTLV_Value_t pValue = {NULL} ;
 
 	// Set the Tag value
@@ -60,7 +61,12 @@ int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 			break ;
 		case ZTTLV_BUFFER :
 			// (*pValue.pzTTLV_Buffer) = (zTTLV_Buffer_t) *AzTTLV_Item.zValue.pzTTLV_Buffer ;
-			memcpy( pValue.pzTTLV_Buffer, AzTTLV_Item.zValue.pzTTLV_Buffer, AzTTLV_Item.zLength ) ;
+			memcpy( pValue.pzTTLV_Buffer, AzTTLV_Item.zValue.pzTTLV_Buffer->pzTTLV_Buffer, AzTTLV_Item.zLength ) ;
+//			for( ui8 = 0 ; ui8 < AzTTLV_Item.zLength ; ui8 ++ )
+//			{
+//				pValue.pzTTLV_Buffer[ui8] = AzTTLV_Item.zValue.pzTTLV_Buffer->pzTTLV_Buffer[ui8] ;
+//			}
+
 			pzTTLV_Buffer->current_Position += AzTTLV_Item.zLength ;
 			break ;
 		default :
