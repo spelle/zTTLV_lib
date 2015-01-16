@@ -20,7 +20,6 @@ int zTTLV_Initialize( zTTLV_Buffer_t * pzTTLV_Buffer, size_t AzTTLV_Buffer_Size 
 
 int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 {
-	uint8_t ui8 = 0 ;
 	zTTLV_Value_t pValue = {NULL} ;
 
 	// Set the Tag value
@@ -35,8 +34,10 @@ int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 	pzTTLV_Buffer->pzTTLV_Buffer[pzTTLV_Buffer->current_Position] = AzTTLV_Item.zLength ;
 	pzTTLV_Buffer->current_Position += sizeof(AzTTLV_Item.zLength) ;
 
+	// Initialize the pValue pointer to destination
 	pValue.pChar = (char *) & pzTTLV_Buffer->pzTTLV_Buffer[pzTTLV_Buffer->current_Position] ;
 
+	// Depending on type, sets the destination value
 	switch( AzTTLV_Item.zType )
 	{
 		case CHAR :
@@ -60,13 +61,8 @@ int zTTLV_Put( zTTLV_Buffer_t * pzTTLV_Buffer, zTTLV_Item_t AzTTLV_Item )
 			pzTTLV_Buffer->current_Position += sizeof(int16_t) ;
 			break ;
 		case ZTTLV_BUFFER :
-			// (*pValue.pzTTLV_Buffer) = (zTTLV_Buffer_t) *AzTTLV_Item.zValue.pzTTLV_Buffer ;
+			// For a zTTLV_Buffer, the totality of the buffer is copied.
 			memcpy( pValue.pzTTLV_Buffer, AzTTLV_Item.zValue.pzTTLV_Buffer->pzTTLV_Buffer, AzTTLV_Item.zLength ) ;
-//			for( ui8 = 0 ; ui8 < AzTTLV_Item.zLength ; ui8 ++ )
-//			{
-//				pValue.pzTTLV_Buffer[ui8] = AzTTLV_Item.zValue.pzTTLV_Buffer->pzTTLV_Buffer[ui8] ;
-//			}
-
 			pzTTLV_Buffer->current_Position += AzTTLV_Item.zLength ;
 			break ;
 		default :
