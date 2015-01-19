@@ -25,6 +25,8 @@ typedef uint8_t zTTLV_Tag_t ;
  */
 typedef enum
 {
+	END = 0x00 ,
+
 	CHAR = 0x01 ,
 	UINT8 ,
 	INT8 ,
@@ -44,6 +46,7 @@ struct zTTLV_Item ;
  */
 typedef union
 {
+	void          * pVoid   ;
 	char          * pChar   ;
 	uint8_t       * pUInt8  ;
 	int8_t        * pInt8   ;
